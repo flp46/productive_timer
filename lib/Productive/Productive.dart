@@ -12,7 +12,7 @@ class ProductiveTime extends StatefulWidget{
 
 class ProductiveTimeState extends State<ProductiveTime>{
   
-  static int minutos = 2;
+  static int minutos = 0;
   static int segundos = 10;
   static int segundoStandart = 1;
   final snackbarProductivo = SnackBar(content: Text('Terminamos el tiempo productivo'));
@@ -49,17 +49,54 @@ class ProductiveTimeState extends State<ProductiveTime>{
         }
       }
     });
+  }
 
+  //CONTROLADORES PARA QUE EL TEXTO DE LOS BOTONES VAYA CAMBIANDO
+  String startButton = 'Start';
+  bool controlStartButton = true;
+  String stopButton = 'Stop';
+  int controlStopButton = -1;  
+  textInButtonsStart(){
+    setState(() {
+      if (controlStartButton == true){
+        startButton = 'Continue';
+      } else {
+        startButton = 'Start';
+      }
+    });
+  }
+
+  //CONTROLADOR PARA LOS CAMBIOS EN EL BOTON DE STOP
+  textInButtonStop(){
+    setState(() {
+      if (controlStopButton % 2 == 0){
+        stopButton = 'Stop';
+      } else {
+        stopButton = 'Restart';
+      }      
+    });
+  }
+
+  //Pausa el tiempo
+  cancelTimer(){
+    timer.cancel();
+    textInButtonsStart();
+    controlStopButton++;
+    textInButtonStop();
+    //cuando hago el primer click el texto de start debe cambia a continue y el texto de stop a restart
   }
 
   // Es el callback que actualiza el estado cada segundo que va pasando
   updateTime(){
-    Timer.periodic(segundosARestar, (Timer timer){
+    controlStopButton++; //Al darle continue, necesito que tambien se actualice el boton de restart y pase a stop
+    textInButtonStop(); //reconstruyo el build
+    timer = Timer.periodic(segundosARestar, (Timer timer){
       if (tiempoRestante >= 1){
         showTime();
       } else {
+        textInButtonsStart();
         showMessage();
-        timer.cancel();
+        cancelTimer();
       }
     });
   }
@@ -70,9 +107,20 @@ class ProductiveTimeState extends State<ProductiveTime>{
     return Container(
       child:Column(
         children: <Widget>[
-          FloatingActionButton(onPressed: updateTime),
+          RaisedButton(
+            onPressed: updateTime,
+            child: Text(
+              startButton
+            ),
+          ),
           Text(minutos.toString()),
-          Text(segundos.toString())
+          Text(segundos.toString()),
+          RaisedButton(
+            onPressed: cancelTimer,
+            child: Text(
+              stopButton
+            ),
+          )
         ] 
       ) 
     );
