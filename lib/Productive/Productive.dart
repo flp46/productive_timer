@@ -49,7 +49,6 @@ class ProductiveTimeState extends State<ProductiveTime>{
         }
       }
     });
-
   }
 
   // Es el callback que actualiza el estado cada segundo que va pasando
