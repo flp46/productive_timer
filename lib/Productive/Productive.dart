@@ -77,13 +77,27 @@ class ProductiveTimeState extends State<ProductiveTime>{
     });
   }
 
-  //Pausa el tiempo
+  //VUELVE A EMPEZAR EL TIMER CON LOS VALORES ORIGINALES
+  restartTimer(){
+    setState(() {
+      tiempoRestante = tiempoProductivo.inSeconds;
+      minutos = 0;
+      segundos = 10;
+      startButton = 'Start';
+    });
+  }
+
+  //PAUSA EL TIEMPO
   cancelTimer(){
-    timer.cancel();
-    textInButtonsStart();
-    controlStopButton++;
-    textInButtonStop();
-    //cuando hago el primer click el texto de start debe cambia a continue y el texto de stop a restart
+    if (stopButton == 'Restart'){
+      restartTimer();
+    } else {
+      timer.cancel();
+      textInButtonsStart();
+      controlStopButton++;
+      textInButtonStop();
+    }
+
   }
 
   // Es el callback que actualiza el estado cada segundo que va pasando
