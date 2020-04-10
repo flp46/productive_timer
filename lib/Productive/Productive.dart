@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
-
+import 'package:audioplayers/audio_cache.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 class ProductiveTime extends StatefulWidget{
   
@@ -21,12 +22,22 @@ class ProductiveTimeState extends State<ProductiveTime>{
   static Duration segundosARestar = Duration(seconds: 1);
   int tiempoRestante = tiempoProductivo.inSeconds;
 
+  static AudioPlayer audioPlayer = AudioPlayer();
+  AudioCache audioCache = AudioCache(fixedPlayer: audioPlayer);
 
   Timer timer;
 
   // Muestra el snackbar que se levanta al terminar el tiempo productivo
   showMessage(){
     Scaffold.of(context).showSnackBar(snackbarProductivo);
+  }
+
+  playMusica() async {
+    var soundBegin = await audioCache.play('musica/notGivingUp.mp3');
+  }
+
+  stopMusica() async {
+    var soundStop = await audioPlayer.stop();
   }
 
   // Este metodo va a controlar los minutos y segundos que se muestran en pantalla
@@ -110,6 +121,7 @@ class ProductiveTimeState extends State<ProductiveTime>{
       } else {
         textInButtonsStart();
         showMessage();
+        playMusica();
         cancelTimer();
       }
     });
@@ -134,7 +146,9 @@ class ProductiveTimeState extends State<ProductiveTime>{
             child: Text(
               stopButton
             ),
-          )
+          ),
+          RaisedButton(onPressed: playMusica),
+          FloatingActionButton(onPressed: stopMusica)
         ] 
       ) 
     );
