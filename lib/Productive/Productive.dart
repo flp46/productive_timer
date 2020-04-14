@@ -129,29 +129,67 @@ class ProductiveTimeState extends State<ProductiveTime>{
  
   @override
   Widget build(BuildContext context) {
+    
+  String pathImage = "assets/slider/break.jpg";
+
     // TODO: implement build
     return Container(
-      child:Column(
+      child: Row(
         children: <Widget>[
-          RaisedButton(
-            onPressed: updateTime,
-            child: Text(
-              startButton
-            ),
+          Container(
+            child: Text('hols'),
           ),
-          Text(minutos.toString()),
-          Text(segundos.toString()),
-          RaisedButton(
-            onPressed: cancelTimer,
-            child: Text(
-              stopButton
-            ),
+          Container(
+            child: Text('hols'),
+            margin: EdgeInsets.all(20),
           ),
-          RaisedButton(onPressed: playMusica),
-          FloatingActionButton(onPressed: stopMusica)
-        ] 
-      ) 
+          Container(
+            child: Text('hols'),
+          )
+        ]
+      ),
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          fit: BoxFit.cover,
+          image: AssetImage(pathImage)
+        )
+      ),
+      margin: EdgeInsets.all(10),
+      padding: EdgeInsets.all(20.0),
+      alignment: Alignment.center,
+      constraints: BoxConstraints.tightForFinite(
+        width: 800,
+        height: 300
+      ),
+
     );
+
+
+
+
+
+    // return Container(
+    //   child:Column(
+    //     children: <Widget>[
+    //       RaisedButton(
+    //         onPressed: updateTime,
+    //         child: Text(
+    //           startButton
+    //         ),
+    //       ),
+    //       Text(minutos.toString()),
+    //       Text(segundos.toString()),
+    //       RaisedButton(
+    //         onPressed: cancelTimer,
+    //         child: Text(
+    //           stopButton
+    //         ),
+    //       ),
+    //       RaisedButton(onPressed: playMusica),
+    //       FloatingActionButton(onPressed: stopMusica)
+    //     ] 
+    //   ) 
+    // );
   }
 }
 
