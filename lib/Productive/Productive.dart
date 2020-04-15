@@ -130,24 +130,10 @@ class ProductiveTimeState extends State<ProductiveTime>{
   @override
   Widget build(BuildContext context) {
     
-  String pathImage = "assets/slider/break.jpg";
+  String pathImage = "assets/slider/productive.jpg";
 
     // TODO: implement build
     return Container(
-      child: Row(
-        children: <Widget>[
-          Container(
-            child: Text('hols'),
-          ),
-          Container(
-            child: Text('hols'),
-            margin: EdgeInsets.all(20),
-          ),
-          Container(
-            child: Text('hols'),
-          )
-        ]
-      ),
       decoration: BoxDecoration(
         image: DecorationImage(
           fit: BoxFit.cover,
@@ -156,12 +142,47 @@ class ProductiveTimeState extends State<ProductiveTime>{
       ),
       margin: EdgeInsets.all(10),
       padding: EdgeInsets.all(20.0),
-      alignment: Alignment.center,
+      // alignment: Alignment.center,
       constraints: BoxConstraints.tightForFinite(
         width: 800,
         height: 300
       ),
-
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Container(
+            width: 100,
+            height: 135,
+            decoration: BoxDecoration(
+              color: Color(0xFF40405c).withOpacity(0.8),
+              borderRadius: BorderRadius.circular(12)
+            ),
+            alignment: Alignment.center,
+            child: Text(minutos.toString(),
+              style: TextStyle(
+                color: Color(0xFFe5e3e4),
+                fontSize: 30 
+              ),
+            ),
+          ),
+          Container(
+            width: 100,
+            height: 135,
+            decoration: BoxDecoration(
+              color: Color(0xFF40405c).withOpacity(0.8),
+              borderRadius: BorderRadius.circular(12)
+            ),
+            alignment: Alignment.center,
+            margin: EdgeInsets.all(10),
+            child: Text(segundos.toString(),
+              style: TextStyle(
+                color: Color(0xFFe5e3e4),
+                fontSize: 30 
+              ),
+            ),
+          ),
+        ],
+      ),
     );
 
 
