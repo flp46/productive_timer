@@ -133,7 +133,7 @@ class ProductiveTimeState extends State<ProductiveTime>{
   String pathImage = "assets/slider/productive.jpg";
 
     // TODO: implement build
-    return Container(
+    return Container( //LAYOUT GENERAL
       decoration: BoxDecoration(
         image: DecorationImage(
           fit: BoxFit.cover,
@@ -142,47 +142,109 @@ class ProductiveTimeState extends State<ProductiveTime>{
       ),
       margin: EdgeInsets.all(10),
       padding: EdgeInsets.all(20.0),
-      // alignment: Alignment.center,
       constraints: BoxConstraints.tightForFinite(
         width: 800,
-        height: 300
+        height: 330
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Container(
-            width: 100,
-            height: 135,
-            decoration: BoxDecoration(
-              color: Color(0xFF40405c).withOpacity(0.8),
-              borderRadius: BorderRadius.circular(12)
+      child: Container( // CONTENIDO TOTAL DEL LAYOUT
+        child: Column( 
+          children: <Widget>[
+            Row( // Cuadros en los que se ve el tiempo
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Container( //minutos
+                  width: 100,
+                  height: 135,
+                  decoration: BoxDecoration(
+                    color: Color(0xFF40405c).withOpacity(0.8),
+                    borderRadius: BorderRadius.circular(12)
+                  ),
+                  alignment: Alignment.center,
+                  child: Text(minutos.toString(),
+                    style: TextStyle(
+                      color: Color(0xFFe5e3e4),
+                      fontSize: 30 
+                    ),
+                  ),
+                ),
+                Container( //segundos
+                  width: 100,
+                  height: 135,
+                  decoration: BoxDecoration(
+                    color: Color(0xFF40405c).withOpacity(0.8),
+                    borderRadius: BorderRadius.circular(12)
+                  ),
+                  alignment: Alignment.center,
+                  margin: EdgeInsets.all(10),
+                  child: Text(segundos.toString(),
+                    style: TextStyle(
+                      color: Color(0xFFe5e3e4),
+                      fontSize: 30 
+                    ),
+                  ),
+                ),
+              ],
             ),
-            alignment: Alignment.center,
-            child: Text(minutos.toString(),
-              style: TextStyle(
-                color: Color(0xFFe5e3e4),
-                fontSize: 30 
-              ),
+            Container(
+              child: Row( //Cuadro de los botones
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Container( //boton de inicio
+                    width: 130,
+                    child: RaisedButton(
+                      onPressed: updateTime,
+                      padding: EdgeInsets.all(0.0),
+                      child:Container(
+                        padding: EdgeInsets.only(top:10, bottom: 10, left: 44, right: 44),
+                        decoration: BoxDecoration(
+                          color:Color(0xFF40405c)
+                        ),
+                        child: Text(
+                          startButton,
+                          style: TextStyle(
+                            color: Color(0xFFe5e3e4),
+                            fontSize: 18,
+                          ),
+                        ),
+                      )
+                    ),
+                  ),
+                  Container( //boton de finalizacion
+                    width: 130,
+                    margin: EdgeInsets.all(10),
+                    child:RaisedButton(
+                      onPressed: cancelTimer,
+                      padding: EdgeInsets.all(0.0),
+                      child: Container(
+                        padding: EdgeInsets.only(top:10, bottom: 10, left: 46, right: 46),
+                        decoration: BoxDecoration(
+                          color:Color(0xFF40405c)
+                        ),
+                        child: Text(
+                          stopButton,
+                          style: TextStyle(
+                            color: Color(0xFFe5e3e4),
+                            fontSize: 18,
+                          ),
+                        ),
+                      )
+                    ),
+                  ),
+                ],
+              )
             ),
-          ),
-          Container(
-            width: 100,
-            height: 135,
-            decoration: BoxDecoration(
-              color: Color(0xFF40405c).withOpacity(0.8),
-              borderRadius: BorderRadius.circular(12)
-            ),
-            alignment: Alignment.center,
-            margin: EdgeInsets.all(10),
-            child: Text(segundos.toString(),
-              style: TextStyle(
-                color: Color(0xFFe5e3e4),
-                fontSize: 30 
-              ),
-            ),
-          ),
-        ],
-      ),
+            Container(
+              alignment: Alignment.centerRight,
+              child: FloatingActionButton(
+                onPressed: stopMusica,
+                backgroundColor: Color(0xFF6c64f9),
+                child: Icon(Icons.volume_up)
+                
+              )
+            ), 
+          ],
+        )
+      )
     );
 
 
