@@ -13,8 +13,8 @@ class ProductiveTime extends StatefulWidget{
 
 class ProductiveTimeState extends State<ProductiveTime>{
   
-  static int minutos = 0;
-  static int segundos = 10;
+  static int minutos = 56;
+  static int segundos = 15;
   static int segundoStandart = 1;
   final snackbarProductivo = SnackBar(content: Text('Terminamos el tiempo productivo'));
 
@@ -92,8 +92,8 @@ class ProductiveTimeState extends State<ProductiveTime>{
   restartTimer(){
     setState(() {
       tiempoRestante = tiempoProductivo.inSeconds;
-      minutos = 0;
-      segundos = 10;
+      minutos = 56;
+      segundos = 15;
       startButton = 'Start';
     });
   }
@@ -144,7 +144,7 @@ class ProductiveTimeState extends State<ProductiveTime>{
       padding: EdgeInsets.all(20.0),
       constraints: BoxConstraints.tightForFinite(
         width: 800,
-        height: 330
+        height: 307,
       ),
       child: Container( // CONTENIDO TOTAL DEL LAYOUT
         child: Column( 
@@ -195,7 +195,7 @@ class ProductiveTimeState extends State<ProductiveTime>{
                       onPressed: updateTime,
                       padding: EdgeInsets.all(0.0),
                       child:Container(
-                        padding: EdgeInsets.only(top:10, bottom: 10, left: 44, right: 44),
+                        padding: startButton == 'Start' ? EdgeInsets.only(top:10, bottom: 10, left: 44, right: 44) : EdgeInsets.only(top:10, bottom: 10, left: 27, right: 27),
                         decoration: BoxDecoration(
                           color:Color(0xFF40405c)
                         ),
@@ -216,7 +216,7 @@ class ProductiveTimeState extends State<ProductiveTime>{
                       onPressed: cancelTimer,
                       padding: EdgeInsets.all(0.0),
                       child: Container(
-                        padding: EdgeInsets.only(top:10, bottom: 10, left: 46, right: 46),
+                        padding: stopButton == 'Stop' ? EdgeInsets.only(top:10, bottom: 10, left: 46, right: 46) : EdgeInsets.only(top:10, bottom: 10, left: 35, right: 35),
                         decoration: BoxDecoration(
                           color:Color(0xFF40405c)
                         ),
@@ -235,44 +235,20 @@ class ProductiveTimeState extends State<ProductiveTime>{
             ),
             Container(
               alignment: Alignment.centerRight,
-              child: FloatingActionButton(
-                onPressed: stopMusica,
-                backgroundColor: Color(0xFF6c64f9),
-                child: Icon(Icons.volume_up)
-                
+              child: SizedBox(
+                width: 40,
+                height: 40,
+                child: FloatingActionButton(
+                  onPressed: stopMusica,
+                  backgroundColor: Color(0xFF6c64f9),
+                  child: Icon(Icons.volume_up)
+                )
               )
             ), 
           ],
         )
       )
     );
-
-
-
-
-
-    // return Container(
-    //   child:Column(
-    //     children: <Widget>[
-    //       RaisedButton(
-    //         onPressed: updateTime,
-    //         child: Text(
-    //           startButton
-    //         ),
-    //       ),
-    //       Text(minutos.toString()),
-    //       Text(segundos.toString()),
-    //       RaisedButton(
-    //         onPressed: cancelTimer,
-    //         child: Text(
-    //           stopButton
-    //         ),
-    //       ),
-    //       RaisedButton(onPressed: playMusica),
-    //       FloatingActionButton(onPressed: stopMusica)
-    //     ] 
-    //   ) 
-    // );
   }
 }
 
