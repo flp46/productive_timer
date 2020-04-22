@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:productive_timer/BrekTime/Break.dart';
 import 'package:productive_timer/Productive/Productive.dart';
 
 void main() => runApp(MyApp());
@@ -21,9 +22,9 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePage(title: 'Productive Timer'),
     );
-  }
+  }  
 }
 
 class MyHomePage extends StatefulWidget {
@@ -72,7 +73,12 @@ class _MyHomePageState extends State<MyHomePage> {
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
-      body: ProductiveTime(),
+      body: Column(
+        children: <Widget>[
+          ProductiveTime(),
+          BreakTime()
+        ]
+      )
 
         //COMENTE LO QUE ESTABA
         // child: Column(
