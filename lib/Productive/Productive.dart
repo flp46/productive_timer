@@ -7,6 +7,10 @@ import 'package:productive_timer/StopButton.dart';
 
 class ProductiveTime extends StatefulWidget{
   
+  double screenHeight;
+
+  ProductiveTime({Key key, this.screenHeight});
+
   @override
   State<StatefulWidget> createState() {
     return ProductiveTimeState();
@@ -133,13 +137,13 @@ class ProductiveTimeState extends State<ProductiveTime>{
   Widget build(BuildContext context) {
   
   double screenWidth = MediaQuery.of(context).size.width;
-  double screenHeight = MediaQuery.of(context).size.height;  
+  print('El height es  y el width es $screenWidth'); 
   String pathImage = "assets/slider/productive.jpg";
 
     // TODO: implement build
     return Container( //LAYOUT GENERAL
       width: screenWidth,
-      height: screenHeight/2,
+      height: widget.screenHeight/2,
       decoration: BoxDecoration(
         image: DecorationImage(
           fit: BoxFit.cover,
@@ -160,7 +164,7 @@ class ProductiveTimeState extends State<ProductiveTime>{
               children: <Widget>[
                 Container( //minutos
                   width: screenWidth/4,
-                  height: screenHeight/5.5,
+                  height: widget.screenHeight/5.5,
                   decoration: BoxDecoration(
                     color: Color(0xFF40405c).withOpacity(0.8),
                     borderRadius: BorderRadius.circular(12)
@@ -175,7 +179,7 @@ class ProductiveTimeState extends State<ProductiveTime>{
                 ),
                 Container( //segundos
                   width: screenWidth/4,
-                  height: screenHeight/5.5,
+                  height: widget.screenHeight/5.5,
                   decoration: BoxDecoration(
                     color: Color(0xFF40405c).withOpacity(0.8),
                     borderRadius: BorderRadius.circular(12)

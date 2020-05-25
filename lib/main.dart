@@ -73,12 +73,19 @@ class _MyHomePageState extends State<MyHomePage> {
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
-      body: ListView(
-        children: <Widget>[
-          ProductiveTime(),
-          BreakTime()
-        ]
-      )
+      body: Builder(
+        builder: (context){
+
+          final heightScreen = MediaQuery.of(context).size.height - Scaffold.of(context).appBarMaxHeight;
+          print('El primer height $heightScreen');
+          return ListView(
+            children: <Widget>[
+              ProductiveTime(screenHeight: heightScreen,),
+              BreakTime(screenHeight: heightScreen,)
+            ]
+          );
+        })
+
 
 
         //COMENTE LO QUE ESTABA
