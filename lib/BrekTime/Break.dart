@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:audioplayers/audio_cache.dart';
 import 'package:audioplayers/audioplayers.dart';
+import 'package:productive_timer/StarButton.dart';
+import 'package:productive_timer/StopButton.dart';
 
 class BreakTime extends StatefulWidget{
   
@@ -129,11 +131,16 @@ class BreakTimeState extends State<BreakTime>{
  
   @override
   Widget build(BuildContext context) {
-    
-  String pathImage = "assets/slider/break.jpg";
+
+   
+    String pathImage = "assets/slider/break.jpg";
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
 
     // TODO: implement build
     return Container( //LAYOUT GENERAL
+      width: screenWidth,
+      height: screenHeight/2,
       decoration: BoxDecoration(
         image: DecorationImage(
           fit: BoxFit.cover,
@@ -159,8 +166,8 @@ class BreakTimeState extends State<BreakTime>{
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Container( //minutos
-                  width: 100,
-                  height: 135,
+                  width: screenWidth/4,
+                  height: screenHeight/5.5,
                   decoration: BoxDecoration(
                     color: Color(0xFF40405c).withOpacity(0.8),
                     borderRadius: BorderRadius.circular(12)
@@ -174,8 +181,8 @@ class BreakTimeState extends State<BreakTime>{
                   ),
                 ),
                 Container( //segundos
-                  width: 100,
-                  height: 135,
+                  width: screenWidth/4,
+                  height: screenHeight/5.5,
                   decoration: BoxDecoration(
                     color: Color(0xFF40405c).withOpacity(0.8),
                     borderRadius: BorderRadius.circular(12)
@@ -195,47 +202,14 @@ class BreakTimeState extends State<BreakTime>{
               child: Row( //Cuadro de los botones
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Container( //boton de inicio
-                    width: 130,
-                    child: RaisedButton(
-                      onPressed: updateTime,
-                      padding: EdgeInsets.all(0.0),
-                      child:Container(
-                        padding: startButton == 'Start' ? EdgeInsets.only(top:10, bottom: 10, left: 44, right: 44) : EdgeInsets.only(top:10, bottom: 10, left: 27, right: 27),
-                        decoration: BoxDecoration(
-                          color:Color(0xFF40405c)
-                        ),
-                        child: Text(
-                          startButton,
-                          style: TextStyle(
-                            color: Color(0xFFe5e3e4),
-                            fontSize: 18,
-                          ),
-                        ),
-                      )
-                    ),
+                  StartButton(
+                    onPressedStart: updateTime,
+                    startButtonText: startButton,
                   ),
-                  Container( //boton de finalizacion
-                    width: 130,
-                    margin: EdgeInsets.all(10),
-                    child:RaisedButton(
-                      onPressed: cancelTimer,
-                      padding: EdgeInsets.all(0.0),
-                      child: Container(
-                        padding: stopButton == 'Stop' ? EdgeInsets.only(top:10, bottom: 10, left: 46, right: 46) : EdgeInsets.only(top:10, bottom: 10, left: 35, right: 35),
-                        decoration: BoxDecoration(
-                          color:Color(0xFF40405c)
-                        ),
-                        child: Text(
-                          stopButton,
-                          style: TextStyle(
-                            color: Color(0xFFe5e3e4),
-                            fontSize: 18,
-                          ),
-                        ),
-                      )
-                    ),
-                  ),
+                  StopButton(
+                    onPressedStop: cancelTimer,
+                    stopButtonText: stopButton,
+                  )
                 ],
               )
             ),

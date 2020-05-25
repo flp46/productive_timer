@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:audioplayers/audio_cache.dart';
 import 'package:audioplayers/audioplayers.dart';
+import 'package:productive_timer/StarButton.dart';
+import 'package:productive_timer/StopButton.dart';
 
 class ProductiveTime extends StatefulWidget{
   
@@ -129,11 +131,15 @@ class ProductiveTimeState extends State<ProductiveTime>{
  
   @override
   Widget build(BuildContext context) {
-    
+  
+  double screenWidth = MediaQuery.of(context).size.width;
+  double screenHeight = MediaQuery.of(context).size.height;  
   String pathImage = "assets/slider/productive.jpg";
 
     // TODO: implement build
     return Container( //LAYOUT GENERAL
+      width: screenWidth,
+      height: screenHeight/2,
       decoration: BoxDecoration(
         image: DecorationImage(
           fit: BoxFit.cover,
@@ -142,10 +148,10 @@ class ProductiveTimeState extends State<ProductiveTime>{
       ),
       margin: EdgeInsets.all(10),
       padding: EdgeInsets.all(20.0),
-      constraints: BoxConstraints.tightForFinite(
-        width: 800,
-        height: 307,
-      ),
+      // constraints: BoxConstraints.tightForFinite(
+      //   width: screenWidth,
+      //   height: 307,
+      // ),
       child: Container( // CONTENIDO TOTAL DEL LAYOUT
         child: Column( 
           children: <Widget>[
@@ -153,8 +159,8 @@ class ProductiveTimeState extends State<ProductiveTime>{
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Container( //minutos
-                  width: 100,
-                  height: 135,
+                  width: screenWidth/4,
+                  height: screenHeight/5.5,
                   decoration: BoxDecoration(
                     color: Color(0xFF40405c).withOpacity(0.8),
                     borderRadius: BorderRadius.circular(12)
@@ -168,8 +174,8 @@ class ProductiveTimeState extends State<ProductiveTime>{
                   ),
                 ),
                 Container( //segundos
-                  width: 100,
-                  height: 135,
+                  width: screenWidth/4,
+                  height: screenHeight/5.5,
                   decoration: BoxDecoration(
                     color: Color(0xFF40405c).withOpacity(0.8),
                     borderRadius: BorderRadius.circular(12)
@@ -189,47 +195,14 @@ class ProductiveTimeState extends State<ProductiveTime>{
               child: Row( //Cuadro de los botones
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Container( //boton de inicio
-                    width: 130,
-                    child: RaisedButton(
-                      onPressed: updateTime,
-                      padding: EdgeInsets.all(0.0),
-                      child:Container(
-                        padding: startButton == 'Start' ? EdgeInsets.only(top:10, bottom: 10, left: 44, right: 44) : EdgeInsets.only(top:10, bottom: 10, left: 27, right: 27),
-                        decoration: BoxDecoration(
-                          color:Color(0xFF40405c)
-                        ),
-                        child: Text(
-                          startButton,
-                          style: TextStyle(
-                            color: Color(0xFFe5e3e4),
-                            fontSize: 18,
-                          ),
-                        ),
-                      )
-                    ),
+                  StartButton(
+                    onPressedStart: updateTime,
+                    startButtonText: startButton,
                   ),
-                  Container( //boton de finalizacion
-                    width: 130,
-                    margin: EdgeInsets.all(10),
-                    child:RaisedButton(
-                      onPressed: cancelTimer,
-                      padding: EdgeInsets.all(0.0),
-                      child: Container(
-                        padding: stopButton == 'Stop' ? EdgeInsets.only(top:10, bottom: 10, left: 46, right: 46) : EdgeInsets.only(top:10, bottom: 10, left: 35, right: 35),
-                        decoration: BoxDecoration(
-                          color:Color(0xFF40405c)
-                        ),
-                        child: Text(
-                          stopButton,
-                          style: TextStyle(
-                            color: Color(0xFFe5e3e4),
-                            fontSize: 18,
-                          ),
-                        ),
-                      )
-                    ),
-                  ),
+                  StopButton(
+                    onPressedStop: cancelTimer,
+                    stopButtonText: stopButton,
+                  )
                 ],
               )
             ),
